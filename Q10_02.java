@@ -21,6 +21,7 @@ public class Q10_02 {
 	
 	public static void main(String[] args) throws FileNotFoundException{
 		FileReader fr=new FileReader("Sample.txt");
+		int i = 0;
 		
 
 		
