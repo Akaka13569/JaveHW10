@@ -34,13 +34,42 @@ public class Dog {
 package CH10;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 
 public class Q10_05 {
 
 	public static void main(String[] args) {
-		File f1 = new File("D:\\Object.dat");
+		File f1 = new File("C:\\data", "ObjectQ10_05.dat");
+		if (!f1.exists()) {
+			f1.getParentFile().mkdirs();
+			try {
+				f1.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
-		System.out.println(f1 + " ,檔案的大小:" + f1.length());
+		try (FileOutputStream fos = new FileOutputStream(f1); ObjectOutputStream oos = new ObjectOutputStream(fos);) {
+			Cat c1 = new Cat("cat1");
+			Cat c2 = new Cat("cat2");
+			Dog d1 = new Dog("dog1");
+			Dog d2 = new Dog("dog2");
+			
+			oos.writeObject(c1); //※以下規定請務必死背!!!!!!!!※
+			oos.writeObject(c2); //要將物件寫進檔案內或寫進永久儲存裝置 務必要序列化 
+			oos.writeObject(d1); //所以 在 Cat Dog的類別都有實作java.io.Serialazable !!
+			oos.writeObject(d2); //※以上規定請務必死背!!!!!!!!※
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
+	
 
 }

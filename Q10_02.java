@@ -19,13 +19,50 @@ import java.io.*;
 
 public class Q10_02 {
 	
-	public static void main(String[] args) throws FileNotFoundException{
-		FileReader fr=new FileReader("Sample.txt");
-		int i = 0;
+	public static void main(String[] args) throws FileNotFoundException {
+		File f1 = new File("D:\\Sample.txt");
+		FileInputStream fis = new FileInputStream(f1);
+		
+		//sample.txtじ舱
+		try {
+			int count = 0;
+			int y = 0;
+			byte[] ba = new byte[8192];
+			while ((count = fis.read(ba))!= -1){
+				System.out.println(f1 +"场じ舱 = " + count);// y += count ,f1 +"场じΤ = " + count
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//sample.txtじ
+		try(FileReader fr = new FileReader(f1);){
+			int count = 0;
+			int y = 0;
+			char[] ch = new char[8192];
+			while ((count = fr.read(ch))!= -1){
+				System.out.println(f1 +"场じ = " + count);
+		}
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//sample.txtΤ碭︽
+		try(FileReader fr = new FileReader(f1);BufferedReader br = new BufferedReader(fr);){
+			int count = 0;
+			String s = null;
+			while ((s = br.readLine())!= null){
+				count ++;
+		}
+			System.out.println(f1 + "场︽计 = " + count);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 
-		
-		
 	}
-
 }

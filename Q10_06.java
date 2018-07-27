@@ -6,13 +6,33 @@
 package CH10;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class Q10_06 {
 
-	public static void main(String[] args) {
-		File f1 = new File("D:\\Object.dat");
-		
-		System.out.println(f1 + " ,檔案的大小:" + f1.length());
+	public static void main(String[] args) throws IOException {
+		File f1 = new File("C:\\data", "ObjectQ10_05.dat");
+		Object o = null;
+		Mammal m = null;
+		try (FileInputStream fis = new FileInputStream(f1); ObjectInputStream ois = new ObjectInputStream(fis);) {
+			while (true) {
+				try {
+					o = ois.readObject();
+					if (o instanceof Mammal) {
+						m = (Mammal) o;
+						m.smile();
+					}
+				} catch (ClassNotFoundException e) {
+					break;
+				}
+			}
+
+		} catch (IOException e) {
+			System.out.println("end");
+			;
+		}
 	}
 
 }
