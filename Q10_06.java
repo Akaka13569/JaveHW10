@@ -17,7 +17,7 @@ public class Q10_06 {
 		Object o = null;
 		Mammal m = null;
 		try (FileInputStream fis = new FileInputStream(f1); ObjectInputStream ois = new ObjectInputStream(fis);) {
-			while (true) {
+			while (true) { //true只是為了要讓迴圈跑起來! 
 				try {
 					o = ois.readObject();
 					if (o instanceof Mammal) {
